@@ -1,0 +1,19 @@
+Piensa en el for como una forma de repetir algo un número específico de veces conocido de antemano, mientras que el while se usa cuando no sabes cuántas veces necesitas repetir algo, pero tienes una condición que debe cumplirse para continuar.
+
+Usamos for, si sabes exactamente cuántas veces quieres repetir algo:
+
+# Imprimir números del 1 al 5
+for i in range(1, 6):
+    print(i)
+
+Usamos while si necesitas repetir algo hasta que se cumpla una condición:
+
+# Sumar números hasta que la suma sea mayor que 10
+total = 0
+num = 1
+while total <= 10:
+    total += num
+    num += 1
+print("La suma superó 10.")
+ 
+Conclusión: usa for cuando sepas cuántas veces quieres repetir algo y while cuando necesites repetir hasta que se cumpla una condición específica.

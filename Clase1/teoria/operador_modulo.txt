@@ -1,0 +1,12 @@
+En Python, así como en la mayoría de los otros lenguajes de programación, el símbolo porcentaje (%) en Python se llama Operador de Módulo. 
+
+Retorna el remanente de la división del operando izquierdo por el operando derecho. Se usa para obtener el residuo o Resto de un problema de división.
+PARTES DE UNA DIVISION: EL DIVIDENTO, DIVISOR, RESTO Y COCIENTE
+
+El operador de modulo es considerado una operación aritmética al igual que los operadores +, -, /, *, **, //.
+ 
+Ejemplo:
+ 
+24 % 2 devuelve 0
+ 
+7 % 2 devuelve 1

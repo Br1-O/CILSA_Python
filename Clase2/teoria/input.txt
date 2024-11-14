@@ -1,0 +1,19 @@
+La función input() en Python siempre captura la entrada del usuario como una cadena de texto, y si queremos manejar datos como numeros, debemos hacer conversiones, usando int().
+
+input(): Esta función permite al usuario ingresar datos desde el teclado. Todo lo que se ingrese a través de input() se almacena como una cadena de texto (string), sin importar si son letras, números o símbolos.
+
+int(): Esta función convierte un valor a un número entero. Cuando se usa con int(), es útil para transformar la entrada del usuario en un número, permitiendo realizar operaciones matemáticas con él.
+
+Ejemplo de uso:
+numero = int(input("Ingrese un número: "))
+En este caso, input() solicita al usuario que introduzca un valor, y int() convierte ese valor en un número entero para que pueda usarse en cálculos o comparaciones.
+
+ 
+
+O podemos obtener el dato de entrada y luego convertirlo a número en otra línea de código:
+
+numero = input("Ingrese un número: ")
+
+numero_real = int(numero)
+
+Última modificación: miércoles, 6 de noviembre de 2024, 14:53

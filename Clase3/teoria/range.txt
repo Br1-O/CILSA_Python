@@ -1,0 +1,8 @@
+La función range() en Python se utiliza para generar una secuencia de números. Puede ser utilizada en bucles como for para iterar sobre una serie de valores.
+
+Sintaxis básica de range():
+ 
+range(inicio, fin, paso)
+inicio (opcional): El valor desde el cual empieza la secuencia (por defecto es 0).
+fin: El valor hasta el cual se genera la secuencia (no se incluye).
+paso (opcional): La cantidad que se suma entre cada número en la secuencia (por defecto es 1).

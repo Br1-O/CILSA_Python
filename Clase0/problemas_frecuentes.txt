@@ -1,0 +1,16 @@
+Error al iniciar la instalación de Python
+Tal vez sea tu version del procesador (32 o 64).
+
+Para saber cual podes (en Windows 10) presionar la tecla Windows y a continuacion escribir "Acerca de tu PC" y entrar en esa opcion. Luego verás dentro de los datos que te muestra si tu sistema es de 32 o 64 bits.
+
+Sabiendo esto, podes instalarte alguna de las ultimas versiones de python (no tiene que ser la última). Por ejemplo:
+
+para 32 bits: https://www.python.org/ftp/python/3.12.7/python-3.12.7.exe
+para 64 bits: https://www.python.org/ftp/python/3.12.7/python-3.12.7.exe
+
+Si tu Windows es antiguo (XP por ejemplo), tenes que buscar las versiones Python 3.4.3. o anterior (siempre Python 3)
+En https://www.python.org/downloads/ hay debajo una seccion "Looking for a specific release? Python releases by version number:"
+buscas en el listado un python adecuado, presionas en "Download" que está al costado.
+
+Luego en la nueva página al final en la sección "Files", elegis "Windows x86 MSI installer    Windows" o 
+"Windows x86-64 MSI installer" segun tu version de procesador.

@@ -1,0 +1,28 @@
+En Python, los bucles while y for, while True, junto con las instrucciones break y continue, son herramientas poderosas que permiten controlar el flujo de ejecución dentro de un ciclo. A continuación, te explico cómo funcionan:
+
+while True:
+
+El bucle while True se utiliza cuando quieres que el ciclo se ejecute indefinidamente, hasta que se cumpla una condición de salida (como el uso de break).
+True es siempre verdadero, por lo que el bucle no tiene fin hasta que se interrumpa explícitamente con una instrucción como break.
+break:
+
+La instrucción break se usa para salir inmediatamente de un bucle (ya sea un while o un for), independientemente de si la condición del bucle sigue siendo verdadera.
+Generalmente se utiliza cuando se alcanza una condición que indica que ya no es necesario seguir ejecutando el ciclo.
+continue:
+
+La instrucción continue se usa para saltar el resto del código dentro de un bucle y volver a la siguiente iteración del bucle.
+No termina el bucle, sino que simplemente pasa a la siguiente vuelta, omitiendo el código que sigue después de continue.
+ 
+Ejemplo con While True
+i = 0
+while True:  # Este bucle es infinito
+    if i == 3:
+        break  # El bucle se detiene cuando i es igual a 3
+    print(i)
+    i += 1
+
+Ejemplo con for
+for i in range(5):
+    if i == 3:
+        continue  # Salta esta iteración cuando i es igual a 3
+    print(i)

@@ -1,0 +1,112 @@
+EJEMPLO CON FOR
+Enunciado: Supongamos que queremos imprimir los números pares del 2 al 20 y sumarlos al mismo tiempo. Podemos hacerlo utilizando un bucle for, la función range() y un salto de 2 en 2.
+
+Código:
+
+# Inicializar la suma
+suma_pares = 0
+
+# Imprimir números pares del 2 al 20 y sumarlos
+for num in range(2, 21, 2):
+    print("Número par:", num)
+    suma_pares += num
+
+# Imprimir la suma total
+print("La suma de los números pares es:", suma_pares)
+
+ 
+
+Explicación: range(2, 21, 2) genera una secuencia de números del 2 al 20 con un incremento de 2 en cada paso. Luego, dentro del bucle for, imprimimos cada número par y lo sumamos a la variable suma_pares. Finalmente, imprimimos la suma total de los números pares.
+
+
+EJEMPLO CON WHILE
+Enunciado: Queremos contar cuántos días tardará una planta en crecer hasta alcanzar cierta altura, incrementando la altura cada día hasta que alcance 30 centímetros.
+
+Código:
+
+altura = 5  # altura inicial de la planta
+dias = 0  # contador de días
+
+while altura < 30:
+    altura += 5  # la planta crece 5 centímetros cada día
+    dias += 1
+    print("Día", dias, ": La planta mide", altura, "centímetros.")
+
+print("La planta tardó", dias, "días en crecer hasta 30 centímetros.")
+
+ 
+
+Explicación: se simula el crecimiento de una planta. La altura inicial de la planta es de 5 centímetros. Utilizando un bucle while, la altura de la planta se incrementa en 5 centímetros cada día hasta alcanzar o superar los 30 centímetros. Se lleva un registro del número de días que han pasado. Una vez que la planta alcanza los 30 centímetros, se muestra cuántos días tardó en crecer hasta esa altura.
+
+
+Ejemplo incrementar: enunciado inicial + nuevos requisitos.
+Enunciado: Escribe un programa en Python que pida al usuario que ingrese un número y continúe solicitando hasta que el usuario ingrese el número 0. Luego, el programa debe imprimir "Fin del programa" al terminar.
+
+# Código inicial
+numero = int(input("Ingresa un número (0 para salir): "))
+
+while numero != 0:
+    numero = int(input("Ingresa un número (0 para salir): "))
+
+print("Fin del programa")
+
+
+Primer requisito: Ahora, además de pedir números, el programa debe mostrar cuántos números se ingresaron antes de que el usuario introduzca el 0.
+
+
+numero = int(input("Ingresa un número (0 para salir): "))
+contador = 0  # Contador para llevar la cuenta de los números ingresados
+
+while numero != 0:
+    contador += 1
+    numero = int(input("Ingresa un número (0 para salir): "))
+
+print("Se ingresaron", contador, "números")
+print("Fin del programa")
+
+
+Segundo requisito: Ahora, además de contar los números, el programa también debe calcular la suma de todos los números ingresados (sin contar el 0) y mostrarla al final.
+
+
+numero = int(input("Ingresa un número (0 para salir): "))
+contador = 0  # Contador para llevar la cuenta de los números ingresados
+suma = 0      # Variable para acumular la suma de los números
+
+while numero != 0:
+    contador += 1
+    suma += numero  # Acumula la suma de cada número ingresado
+    numero = int(input("Ingresa un número (0 para salir): "))
+
+print("Se ingresaron", contador, "números")
+print("La suma de los números ingresados es:", suma)
+print("Fin del programa")
+
+Tercer requisito: Ahora, queremos que el programa permita terminar antes de que se ingrese el 0, detectando si el usuario ingresa un número negativo. En ese caso, el programa debería mostrar un mensaje de advertencia y terminar inmediatamente.
+
+contador = 0  # Contador para llevar la cuenta de los números ingresados
+suma = 0      # Variable para acumular la suma de los números
+
+while True:
+    numero = int(input("Ingresa un número (0 para salir): "))
+
+    if numero < 0:
+        print("Número negativo detectado. Fin del programa.")
+        break
+
+    if numero == 0:
+        print("Se ingresaron", contador, "números")
+        print("La suma de los números ingresados es:", suma)
+        print("Fin del programa")
+        break
+
+    contador += 1
+    suma += numero  # Acumula la suma de cada número ingresado
+
+Resumen del progreso
+
+Código inicial: Se pide un número hasta que el usuario ingrese 0.
+Se cuenta cuántos números fueron ingresados.
+Se suma el total de los números ingresados.
+Se detecta un número negativo, el programa termina inmediatamente con break.
+ 
+NOTA: ¿Puedo usar numero <= 0 lo en lugar comparar con 0 y <0 ? Si, pero implica un pequeño sacrificio de claridad, ya que estamos combinando dos situaciones distintas bajo una misma condición sin distinguirlas claramente. más compacta pero menos explícita. MENOS DESCRIPTIVO.
