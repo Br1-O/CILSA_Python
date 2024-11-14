@@ -19,7 +19,7 @@ while not exit:
     if grade == "FIN" or grade == "fin":
         exit = True
     else:
-        if minor_grade <= int(grade) <= greater_grade:
+        if minor_grade <= float(grade) <= greater_grade:
             grade_list.append(grade)
 
 if grade_list:
