@@ -16,9 +16,14 @@ num = int(input("Ingrese un número entero para chequear si está incluido dentr
 
 is_included = False
 
+"""Using for (inefficient)
 for i in range(init, (end + 1)):
     if i == num:
         is_included = True
+"""
+
+if init <= num <= end:
+    is_included = True
 
 if is_included:
     print(f"El número {num} está incluido dentro del intervalo [{init}, {end}].")
