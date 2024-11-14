@@ -18,11 +18,11 @@ while not exit:
     grade = input("Ingrese una nota: ")
     if grade == "FIN" or grade == "fin":
         exit = True
-        continue
-    if minor_grade <= int(grade) <= greater_grade:
-        grade_list.append(grade)
+    else:
+        if minor_grade <= int(grade) <= greater_grade:
+            grade_list.append(grade)
 
-if len(grade_list) > 0 :
+if grade_list:
     print("\nLas notas ingresadas, que son mayores a 6 y menores a 10, fueron:")
     for grade in grade_list:
         print(grade)

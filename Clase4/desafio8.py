@@ -20,10 +20,10 @@ while not exit:
     grade = input("Ingrese una nota: ")
     if grade == "FIN" or grade == "fin":
         exit = True
-        continue
-    grade_list.append(grade)
+    else:
+        grade_list.append(grade)
 
-if len(grade_list) > 0 :
+if grade_list:
     print("\nLas notas ingresadas fueron:")
     for grade in grade_list:
         print(grade)
