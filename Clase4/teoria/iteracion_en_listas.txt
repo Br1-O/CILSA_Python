@@ -1,0 +1,26 @@
+Las listas son estructuras de datos en Python que permiten almacenar múltiples elementos en un orden secuencial. Esto significa que los valores dentro de una lista están organizados en un orden específico, con cada elemento colocado uno después del otro.
+
+Iteración en Listas
+La iteración sobre una lista se refiere al proceso de recorrer cada elemento de la lista para realizar alguna operación con ellos. Una forma común y sencilla de iterar sobre una lista es utilizando el bucle for.
+
+Ejemplo con for
+# Creo una lista con valores
+participantes = ["Daniel", "Maxi", "Lorena"]
+
+# Itero sobre la lista para acceder a cada elemento
+for p in participantes:
+    # Imprimo cada elemento de la lista
+    print(p)
+
+Ejemplo con while
+# Creo una lista con valores
+lista_nombres = ['Daniel', 'Maxi', 'Lorena']
+
+# Inicializo el índice y obtengo la longitud de la lista
+indice = 0
+longitud = len(lista_nombres)
+
+# Itero mientras el índice sea menor que la longitud de la lista
+while indice < longitud:
+    print(lista_nombres[indice])  # Imprime el valor en esa posición
+    indice += 1  # Incremento el índice en 1

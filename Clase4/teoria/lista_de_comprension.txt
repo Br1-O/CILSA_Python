@@ -1,0 +1,36 @@
+La lista de comprensión ayuda a crear nuevas listas a partir de iterables existentes, como listas, cadenas y tuplas.
+La sintaxis es la siguiente:
+
+<new_list> = [<expression> for <item> in <iterable>]
+
+Significa: "realizar esta expresión para cada elemento en esta lista"
+
+ 
+1. Resolver un problema
+Enunciado: "Generar una lista de números al cubo. "
+
+numeros = [2,3,5,7]
+num_cubos = []
+for num in numeros:
+    num_cubos.append(num**3)
+
+
+print(num_cubos) # Salida: [8, 27, 125, 343]
+
+ 
+
+2. Resolverlo con lista de comprensión:
+num_cubos = [num**3 for num in numeros]
+
+print(num_cubos)
+
+# Salida: [8, 27, 125, 343]
+
+ 
+
+3. Condicional dentro de una lista de comprensión
+Además, es posible agregar una estructura condicional <condicion> dentro de la instrucción. La estructura del código es de la siguiente manera:
+
+<new_list> = [<expression> for <item> in <iterable> if <condition>]
+
+Última modificación: miércoles, 13 de noviembre de 2024, 01:45

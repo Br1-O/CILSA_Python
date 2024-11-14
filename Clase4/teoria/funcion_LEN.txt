@@ -1,0 +1,9 @@
+Función LEN
+Es una función de Python que tiene un nombre reservado y dentro un código que ya viene escrito por el lenguaje. Al llamarlo y pasarle un elemento, éste realiza una operación interna y nos devuelve un resultado numérico.
+Se utiliza para conocer longitud de algún elemento en Python, por ejemplo, listas o un String. Ejemplo:
+
+# Longitud de una lista.
+
+longitud = len(lista)
+
+print(longitud)
