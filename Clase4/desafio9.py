@@ -4,7 +4,7 @@ Retomar el ejercicio del desafío anterior pero solo CARGAR en la LISTA aquellas
 MOSTRAR el contenido de cada uno de los valores que existen en la LISTA.
 """
 
-print("Ingrese las notas a cargar: \n (Cuando haya finalizado la carga de notas ingrese 'FIN' para mostrar aquellas entre 6 y 10)\n")
+print("Ingrese las notas a cargar (que son mayores a 6 y menores a 10): \n (Cuando haya finalizado la carga de notas ingrese 'FIN')\n")
 
 #RESOLUCIÓN
 
@@ -21,9 +21,11 @@ while not exit:
     else:
         if minor_grade <= float(grade) <= greater_grade:
             grade_list.append(grade)
+        else:
+            print("¡ERROR! Las notas cargadas deben ser mayores a 6 y menores a 10")
 
 if grade_list:
-    print("\nLas notas ingresadas, que son mayores a 6 y menores a 10, fueron:")
+    print("\nLas notas ingresadas fueron:")
     for grade in grade_list:
         print(grade)
 else:
