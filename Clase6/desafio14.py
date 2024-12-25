@@ -1,27 +1,5 @@
 """
-Desarrollar un programa que tenga un diccionario con nombres, apellidos y DNIs.
-
-A continuación, se deberá ingresar 3 personas con los datos y al final informar su contenido por cada persona.
- 
-Ejemplo:
-
-#1 Creamos un diccionario vacío para almacenar los datos de las personas
-
-#2 Pedimos al usuario que ingrese los datos para 3 personas
-
-for i in range(3):
-
-    #2.1 INPUT del nombre   
-
-    #2.2 INPUT del apellido 
-
-    #2.3 INPUT del dni
-
-    #2.4 Creamos un nuevo diccionario con los datos ingresados, por ejemplo : persona = { "nombre": nombre, "apellido": apellido, "dni": dni }
-
-    #2.5 Agregamos el diccionario de la persona al diccionario general de personas, por ejemplo: personas[i+1] = persona
-
-#3 Mostramos los datos ingresados para cada persona: podemos usar items():
+Retomar el desafío anterior e indicar cuantos y que DNI superan el valor de 40 millones.
 """
 
 person_interface = {"Nombre" : "-", "Apellido" : "-", "DNI" : 00000000}
