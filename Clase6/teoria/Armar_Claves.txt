@@ -1,0 +1,45 @@
+Usar una clave con el índice del range en un diccionario es una técnica útil para generar automáticamente identificadores únicos, como Persona1, Persona2, etc., durante un bucle. Esto es especialmente útil cuando necesitas crear estructuras de datos dinámicamente.
+
+Explicación Paso a Paso
+range y su índice:
+
+El índice del range se genera automáticamente en un bucle for.
+Por ejemplo, range(3) genera los números 0, 1, 2.
+Concatenar el índice con un texto:
+
+Puedes convertir el índice en texto usando str() o un f-string (f'Persona{i+1}'), lo que permite crear claves personalizadas como Persona1, Persona2, etc.
+Asignar un valor a cada clave:
+
+Dentro del bucle, cada clave se asocia a un valor (puede ser un número, texto o incluso otro diccionario).
+Agregar las claves al diccionario:
+
+Usando la sintaxis mi_diccionario[clave] = valor, el diccionario se va llenando con las nuevas claves y valores.
+ 
+
+Ejemplo Sencillo
+Vamos a crear un diccionario donde cada clave sea Persona1, Persona2, etc., y el valor sea solo un nombre.
+
+# Crear un diccionario vacío
+personas = {}
+
+# Usar range para generar claves automáticamente
+for i in range(3):  # Este bucle se ejecutará 3 veces
+    clave = f'Persona{i + 1}'  # Crear claves como Persona1, Persona2, ...
+    nombre = input(f"Ingrese el nombre de la {clave}: ")  # Pedir el nombre
+    personas[clave] = nombre  # Asociar la clave con el valor (nombre)
+
+# Mostrar el diccionario resultante
+print("\nDiccionario generado:")
+print(personas)
+
+ 
+
+Simular ejecución
+
+1- Datos de Entrada (ingreso por teclado):
+
+Persona1: Juan
+Persona2: Ana
+Persona3: Luis
+2- Diccionario generado
+{'Persona1': 'Juan', 'Persona2': 'Ana', 'Persona3': 'Luis'}

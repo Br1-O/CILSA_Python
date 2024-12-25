@@ -1,0 +1,32 @@
+ 
+
+Constructores
+En Python, los constructores son funciones o métodos que crean y devuelven una instancia de un tipo de dato o clase.
+
+Me permite hacer operaciones en 1 sola línea, sin crear variables adicionales.
+Estas operaciones pueden ser para lograr una conversion o generación de una nueva estructura a partir de un elemento iterable, descomponer un elemento.
+
+Para estructuras complejas: list, dict, set y tuple.
+
+
+
+Ejemplos de uso
+# Defino 2 variables.
+
+una_tupla = (1,2,3) # elemento iterable
+nombre = "Kevin"  # elemento iterable
+
+ 
+
+#Ejemplo 1
+una_lista = list(una_tupla)
+# en este caso me sirve para "convertir" un elemento iterable en otro
+# una tupla ahora será una lista y la puedo tratar como tal.
+print(una_lista.append(4))
+print(type(una_lista))
+
+ 
+
+#Ejemplo 2
+# Tambien puedo generar una lista a partir de un string y obtener cada letra. Luego podría iterar sobre ese listado.
+print(list(nombre))
