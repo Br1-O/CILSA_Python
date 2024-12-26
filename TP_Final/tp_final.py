@@ -22,8 +22,6 @@ Usar otro archivo .csv con una estructura diferente, pero implementar algún tip
 Guardar los resultados filtrados en un nuevo archivo CSV o TXT.
 """
 
-
-
 person_interface = {"Nombre" : "-", "Edad" : 0, "Ciudad" : "-"}
 fields = list(person_interface.keys())
 people_interface = {}
@@ -83,7 +81,7 @@ def read_from_file(file_path = ""):
     content = ""
 
     try:
-        with open(file_path, "r") as file:
+        with open(file_path, mode="r", encoding='latin-1') as file:
             content = file.readlines()
             file.close()
     except Exception as e:
@@ -98,7 +96,7 @@ def export_to_csv_file(people = people_interface):
     file_name = input("Ingrese el nombre con el que desea guardar el archivo: \n") + ".csv"
 
     try:
-        with open(file_name, "w") as file:
+        with open(file_name, mode="w", encoding='latin-1') as file:
             file.write(f"{fields[0]}, {fields[1]}, {fields[2]}\n")
             for person in people.values():
                 file.write(f"{person['Nombre']}, {person['Edad']}, {person['Ciudad']} \n")
@@ -140,19 +138,18 @@ def load_data_into_dict(file_path = ""):
 
     return data
 
-def display_data(people = people_interface, message = "■ El listado de las personas registradas es: "):
-
+def display_data(people= people_interface, message="■ El listado de las personas registradas es: "):
     if people:
         print(message)
 
+        # Column headers with fixed width
         print(f"""
+    | {"id".ljust(3)} | {"Nombre".ljust(35)} | {"Edad".ljust(5)} | {"Ciudad".ljust(25)} |
+    {"-" * 80}""")
 
-    | id |      {fields[0]}      | {fields[1]} |      {fields[2]}      |
-
-    """)
-
+        # Rows with fixed-width columns
         for id, person in people.items():
-            print(" "+str(id+1)+" | "+ person["Nombre"]+" | "+str(person["Edad"])+" | "+ str(person["Ciudad"])+"\n")
+            print(f"    | {str(id).ljust(3)} | {person['Nombre'].ljust(35)} | {str(person['Edad']).ljust(5)} | {person['Ciudad'].ljust(25)} |")
     else:
         print("\nNo hay datos para mostrar.")
 
@@ -184,7 +181,7 @@ def filter_data_by(filter = 0):
 
         selected_city = available_cities[get_int_from_input() - 1]
 
-        for id, person in enumerate(people_all_data.values()):
+        for id, person in people_all_data.items():
             if person["Ciudad"] == selected_city:
                 filtered_data[id] = person
 
@@ -253,6 +250,3 @@ def main():
             execute = get_confirmation_yn()
 
 main()
-
-
-
