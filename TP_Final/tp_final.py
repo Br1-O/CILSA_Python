@@ -33,12 +33,18 @@ people_all_data = people_interface.copy()
 people_file_path = "datos.csv"
 
 def clear_console():
+    """
+    Cleans the console
+    """
     if platform.system() == "Windows":
         os.system("cls")  # Clean console for Windows
     else:
         os.system("clear")  # Clean console for macOS y Linux
 
 def show_menu():
+    """
+    Shows the menu into the console
+    """
 
     menu = """
 ╔══════════════════════════════════════════════════════════╗
@@ -60,6 +66,9 @@ def show_menu():
     print(menu)
 
 def get_int_from_input():
+    """
+    Gets an integer from the input catching ValueError exception as validation and returns it
+    """
 
     selected_option = 0
 
@@ -73,6 +82,9 @@ def get_int_from_input():
     return selected_option
 
 def get_confirmation_yn(message = "\n¿Desea volver al menu principal? \n Ingrese: SI ó NO\n"):
+    """
+    Gets an str from the input that must start either with "s" or "n" and returns it
+    """
 
     selected_option = (input(message)[0]).strip().lower()
 
@@ -83,7 +95,6 @@ def get_confirmation_yn(message = "\n¿Desea volver al menu principal? \n Ingres
     return selected_option
 
 def read_from_file(file_path = ""):
-
     """
     Reads the data from a file given the file path as str and returns it
     """
@@ -100,6 +111,11 @@ def read_from_file(file_path = ""):
     return content
 
 def export_to_csv_file(people = people_interface):
+    """
+    Exports the data of the given dict into a csv file, asking for a name for the file before writing it. 
+
+    Returns bool success
+    """
     
     success = False
 
@@ -119,7 +135,6 @@ def export_to_csv_file(people = people_interface):
     return success
 
 def load_data_into_dict(file_path = ""):
-
     """
     Loads the data from a file given the file path as str, puts its content into the proper dictionary structure and returns it.
     """
@@ -149,6 +164,10 @@ def load_data_into_dict(file_path = ""):
     return data
 
 def display_data(people= people_interface, message="■ El listado de las personas registradas es: "):
+    """
+    Displays the fields as column headers and the data correctly formated for the given person structure as rows
+    """
+        
     if people:
         print(message)
 
@@ -164,6 +183,15 @@ def display_data(people= people_interface, message="■ El listado de las person
         print("\nNo hay datos para mostrar.")
 
 def filter_data_by(filter = 0):
+    """
+    Applies filters to the main dict with all the people data and returns it
+
+    Filter 2 is name
+    
+    Filter 3 is age range
+
+    Filter 4 is city
+    """
 
     filtered_data = people_interface.copy()
 
@@ -206,49 +234,53 @@ def filter_data_by(filter = 0):
     return filtered_data
 
 def perform_action(option = 0):
-        if option == 1:
-            display_data(people_all_data, "\n ■ El listado de todas las personas registradas es: ")
-        elif option == 3:
-            repeat = "s"
-            while repeat == "s":
-                filtered_data = filter_data_by(3)
-                display_data(filtered_data, "\n ■ El listado de las personas registradas filtradas por ese rango de edad es: ")
+    """
+    Elif to select the proper set of actions to execute based on the selected option passed as argument
+    """
+    
+    if option == 1:
+        display_data(people_all_data, "\n ■ El listado de todas las personas registradas es: ")
+    elif option == 3:
+        repeat = "s"
+        while repeat == "s":
+            filtered_data = filter_data_by(3)
+            display_data(filtered_data, "\n ■ El listado de las personas registradas filtradas por ese rango de edad es: ")
 
-                save_into_file = get_confirmation_yn("\n¿Desea guardar el listado actual en un nuevo archivo? \n Ingrese: SI ó NO\n")
-                if save_into_file == "s" : export_to_csv_file(filtered_data)
+            save_into_file = get_confirmation_yn("\n¿Desea guardar el listado actual en un nuevo archivo? \n Ingrese: SI ó NO\n")
+            if save_into_file == "s" : export_to_csv_file(filtered_data)
 
-                repeat = get_confirmation_yn("\n¿Desea realizar una nueva busqueda por rango de edad? \n Ingrese: SI ó NO\n")
-                clear_console()
-        elif option == 4:
-            repeat = "s"
-            while repeat == "s":
-                filtered_data = filter_data_by(4)
-                display_data(filtered_data, "\n ■ El listado de las personas registradas en esa ciudad es: ")
-                        
-                save_into_file = get_confirmation_yn("\n¿Desea guardar el listado actual en un nuevo archivo? \n Ingrese: SI ó NO\n")
-                if save_into_file == "s" : export_to_csv_file(filtered_data)
-                
-                repeat = get_confirmation_yn("\n¿Desea realizar una nueva busqueda por ciudad? \n Ingrese: SI ó NO\n")
-                clear_console()
-        elif option == 2:
-            repeat = "s"
-            while repeat == "s":
-                filtered_data = filter_data_by(2)
-                display_data(filtered_data, "\n ■ El listado de las personas registradas con ese nombre o apellido es: ")
-
-                save_into_file = get_confirmation_yn("\n¿Desea guardar el listado actual en un nuevo archivo? \n Ingrese: SI ó NO\n")
-                if save_into_file == "s" : export_to_csv_file(filtered_data)
-
-                repeat = get_confirmation_yn("\n¿Desea realizar una nueva busqueda por nombre o apellido? \n Ingrese: SI ó NO\n")
-                clear_console()
-        elif option == 0:
+            repeat = get_confirmation_yn("\n¿Desea realizar una nueva busqueda por rango de edad? \n Ingrese: SI ó NO\n")
             clear_console()
-            print("\n¡Adiós! ¡Nos vemos la próxima!")
-            global execute
-            execute = "n"
-            return
-        else:
-            print("¡Opción inválida!")
+    elif option == 4:
+        repeat = "s"
+        while repeat == "s":
+            filtered_data = filter_data_by(4)
+            display_data(filtered_data, "\n ■ El listado de las personas registradas en esa ciudad es: ")
+                    
+            save_into_file = get_confirmation_yn("\n¿Desea guardar el listado actual en un nuevo archivo? \n Ingrese: SI ó NO\n")
+            if save_into_file == "s" : export_to_csv_file(filtered_data)
+            
+            repeat = get_confirmation_yn("\n¿Desea realizar una nueva busqueda por ciudad? \n Ingrese: SI ó NO\n")
+            clear_console()
+    elif option == 2:
+        repeat = "s"
+        while repeat == "s":
+            filtered_data = filter_data_by(2)
+            display_data(filtered_data, "\n ■ El listado de las personas registradas con ese nombre o apellido es: ")
+
+            save_into_file = get_confirmation_yn("\n¿Desea guardar el listado actual en un nuevo archivo? \n Ingrese: SI ó NO\n")
+            if save_into_file == "s" : export_to_csv_file(filtered_data)
+
+            repeat = get_confirmation_yn("\n¿Desea realizar una nueva busqueda por nombre o apellido? \n Ingrese: SI ó NO\n")
+            clear_console()
+    elif option == 0:
+        clear_console()
+        print("\n¡Adiós! ¡Nos vemos la próxima!")
+        global execute
+        execute = "n"
+        return
+    else:
+        print("¡Opción inválida!")
 
 def main():
     global people_all_data 
