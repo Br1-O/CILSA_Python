@@ -26,8 +26,9 @@ Guardar los resultados filtrados en un nuevo archivo CSV o TXT.
 
 person_interface = {"Nombre" : "-", "Edad" : 0, "Ciudad" : "-"}
 fields = list(person_interface.keys())
-people_interface = {1:person_interface}
+people_interface = {}
 
+people_all_data = people_interface.copy()
 people_file_path = "datos.csv"
 
 def show_menu():
@@ -48,7 +49,7 @@ def show_menu():
     """
     print(menu)
 
-def get_selected_option():
+def get_int_from_input():
 
     selected_option = 0
 
@@ -56,7 +57,7 @@ def get_selected_option():
         try:
             selected_option = int(input())
             break
-        except TypeError:
+        except ValueError:
             print("¡La opción seleccionada debe ser un número entero!")
     
     return selected_option
@@ -84,7 +85,7 @@ def load_data_into_dict(file_path = ""):
     Loads the data from a file given the file path as str, puts its content into the proper dictionary structure and returns it.
     """
 
-    data = people_interface
+    data = people_interface.copy()
 
     try:
         for index, line in enumerate(read_from_file(file_path)):
@@ -108,9 +109,9 @@ def load_data_into_dict(file_path = ""):
 
     return data
 
-def display_data(people = people_interface):
+def display_data(people = people_interface, message = "■ El listado de las personas registradas es: "):
 
-    print("■ El listado de las personas registradas es: ")
+    print(message)
 
     print(f"""
 
@@ -119,29 +120,78 @@ def display_data(people = people_interface):
 """)
 
     for id, person in people.items():
-        print(" "+str(id)+" | "+ person["Nombre"]+" | "+str(person["Edad"])+" | "+ str(person["Ciudad"])+"\n")
+        print(" "+str(id+1)+" | "+ person["Nombre"]+" | "+str(person["Edad"])+" | "+ str(person["Ciudad"])+"\n")
 
+def filter_data_by(filter = 0):
+
+    filtered_data = people_interface.copy()
+
+    if filter == 2:
+        print("Ingrese la edad minima inclusive que desea que se muestre en el filtrado:")
+        min_age = get_int_from_input()
+        print("Ingrese la edad máxima inclusive que desea que se muestre en el filtrado:")
+        max_age = get_int_from_input()
+
+        for id, person in people_all_data.items():
+            if min_age <= person["Edad"] <= max_age:
+                filtered_data[id] = person
+
+    if filter == 3:
+        print("Seleccione la ciudad de residencia de las personas que desea listar:")
+        
+        available_cities = []
+
+        for person in people_all_data.values():
+            if person["Ciudad"] not in available_cities:
+                available_cities.append(person["Ciudad"])
+        
+        for index, city in enumerate(available_cities):
+            print(f"{index+1}. {city}")
+
+        selected_city = available_cities[get_int_from_input() - 1]
+
+        for id, person in enumerate(people_all_data.values()):
+            if person["Ciudad"] == selected_city:
+                filtered_data[id] = person
+
+    return filtered_data
+
+def export_to_csv_file(people = people_interface):
+    
+    success = False
+
+    file_name = input("Ingrese el nombre con el que desea guardar el archivo: \n") + ".csv"
+
+    with open(file_name, "w") as file:
+        file.write(f"{fields[0]}, {fields[1]}, {fields[2]}\n")
+        for person in people:
+            person["Nombre"]
+
+    return success
 
 def perform_action(option = 0):
 
     if option == 1:
-        display_data(load_data_into_dict(people_file_path))
+        display_data(people_all_data, "\n ■ El listado de todas las personas registradas es: ")
     elif option == 2:
-        return
+        display_data(filter_data_by(2), "\n ■ El listado de las personas registradas filtradas por ese rango de edad es: ")
     elif option == 3:
-        return
+        display_data(filter_data_by(3), "\n ■ El listado de las personas registradas en esa ciudad es: ")
     elif option == 4:
         print("¡Adiós!")
         return
     else:
         print("¡Opción inválida!")
         show_menu()
-        option = get_selected_option()
+        option = get_int_from_input()
         perform_action(option)
 
 def main():
+    global people_all_data 
+    people_all_data = load_data_into_dict(people_file_path)
+
     show_menu()
-    option = get_selected_option()
+    option = get_int_from_input()
     perform_action(option)
 
 main()
