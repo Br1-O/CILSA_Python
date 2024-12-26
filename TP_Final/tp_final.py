@@ -39,12 +39,14 @@ def show_menu():
 
     1. Mostrar el listado completo de personas
 
+    2. Buscar una persona por su nombre o apellido
+
     · Mostrar el listado filtrado por:
 
-        2. Edad
-        3. Ciudad
+        3. Edad
+        4. Ciudad
 
-    4. Salir
+    0. Salir
 
     """
     print(menu)
@@ -140,33 +142,36 @@ def load_data_into_dict(file_path = ""):
 
 def display_data(people = people_interface, message = "■ El listado de las personas registradas es: "):
 
-    print(message)
+    if people:
+        print(message)
 
-    print(f"""
+        print(f"""
 
-| id |      {fields[0]}      | {fields[1]} |      {fields[2]}      |
+    | id |      {fields[0]}      | {fields[1]} |      {fields[2]}      |
 
-""")
+    """)
 
-    for id, person in people.items():
-        print(" "+str(id+1)+" | "+ person["Nombre"]+" | "+str(person["Edad"])+" | "+ str(person["Ciudad"])+"\n")
+        for id, person in people.items():
+            print(" "+str(id+1)+" | "+ person["Nombre"]+" | "+str(person["Edad"])+" | "+ str(person["Ciudad"])+"\n")
+    else:
+        print("\nNo hay datos para mostrar.")
 
 def filter_data_by(filter = 0):
 
     filtered_data = people_interface.copy()
 
-    if filter == 2:
-        print("Ingrese la edad minima inclusive que desea que se muestre en el filtrado:")
+    if filter == 3:
+        print("\nIngrese la edad minima inclusive que desea que se muestre en el filtrado:")
         min_age = get_int_from_input()
-        print("Ingrese la edad máxima inclusive que desea que se muestre en el filtrado:")
+        print("\nIngrese la edad máxima inclusive que desea que se muestre en el filtrado:")
         max_age = get_int_from_input()
 
         for id, person in people_all_data.items():
             if min_age <= person["Edad"] <= max_age:
                 filtered_data[id] = person
 
-    if filter == 3:
-        print("Seleccione la ciudad de residencia de las personas que desea listar:")
+    if filter == 4:
+        print("\nSeleccione la ciudad de residencia de las personas que desea listar:")
         
         available_cities = []
 
@@ -183,39 +188,70 @@ def filter_data_by(filter = 0):
             if person["Ciudad"] == selected_city:
                 filtered_data[id] = person
 
+    if filter == 2:
+        person_name = (input("\nIngrese el nombre o apellido de la persona que desea buscar:\n")).strip().lower()
+
+        for id, person in people_all_data.items():
+            names = ((person["Nombre"]).lower()).split()
+            if person_name in names:
+                filtered_data[id] = person
+
     return filtered_data
 
 def perform_action(option = 0):
+        if option == 1:
+            display_data(people_all_data, "\n ■ El listado de todas las personas registradas es: ")
+        elif option == 3:
+            repeat = "s"
+            while repeat == "s":
+                filtered_data = filter_data_by(3)
+                display_data(filtered_data, "\n ■ El listado de las personas registradas filtradas por ese rango de edad es: ")
 
-    if option == 1:
-        display_data(people_all_data, "\n ■ El listado de todas las personas registradas es: ")
-    elif option == 2:
-        filtered_data = filter_data_by(2)
-        display_data(filtered_data, "\n ■ El listado de las personas registradas filtradas por ese rango de edad es: ")
-        save_into_file = get_confirmation_yn("\n¿Desea guardar el listado actual en un nuevo archivo? \n Ingrese: SI ó NO\n")
-        if save_into_file == "s" : export_to_csv_file(filtered_data)
-    elif option == 3:
-        filtered_data = filter_data_by(3)
-        display_data(filtered_data, "\n ■ El listado de las personas registradas en esa ciudad es: ")
-        save_into_file = get_confirmation_yn("\n¿Desea guardar el listado actual en un nuevo archivo? \n Ingrese: SI ó NO\n")
-        if save_into_file == "s" : export_to_csv_file(filtered_data)
-    elif option == 4:
-        print("\n¡Adiós! ¡Nos vemos la próxima!")
-        return
-    else:
-        print("¡Opción inválida!")
-        show_menu()
-        option = get_int_from_input()
-        perform_action(option)
+                save_into_file = get_confirmation_yn("\n¿Desea guardar el listado actual en un nuevo archivo? \n Ingrese: SI ó NO\n")
+                if save_into_file == "s" : export_to_csv_file(filtered_data)
+
+                repeat = get_confirmation_yn("\n¿Desea realizar una nueva busqueda por rango de edad? \n Ingrese: SI ó NO\n")
+        elif option == 4:
+            repeat = "s"
+            while repeat == "s":
+                filtered_data = filter_data_by(4)
+                display_data(filtered_data, "\n ■ El listado de las personas registradas en esa ciudad es: ")
+                        
+                save_into_file = get_confirmation_yn("\n¿Desea guardar el listado actual en un nuevo archivo? \n Ingrese: SI ó NO\n")
+                if save_into_file == "s" : export_to_csv_file(filtered_data)
+                
+                repeat = get_confirmation_yn("\n¿Desea realizar una nueva busqueda por ciudad? \n Ingrese: SI ó NO\n")
+        elif option == 2:
+            repeat = "s"
+            while repeat == "s":
+                filtered_data = filter_data_by(2)
+                display_data(filtered_data, "\n ■ El listado de las personas registradas con ese nombre o apellido es: ")
+
+                save_into_file = get_confirmation_yn("\n¿Desea guardar el listado actual en un nuevo archivo? \n Ingrese: SI ó NO\n")
+                if save_into_file == "s" : export_to_csv_file(filtered_data)
+
+                repeat = get_confirmation_yn("\n¿Desea realizar una nueva busqueda por nombre o apellido? \n Ingrese: SI ó NO\n")
+        elif option == 0:
+            print("\n¡Adiós! ¡Nos vemos la próxima!")
+            global execute
+            execute = "n"
+            return
+        else:
+            print("¡Opción inválida!")
 
 def main():
     global people_all_data 
     people_all_data = load_data_into_dict(people_file_path)
+    global execute 
+    execute = "s"
 
-    show_menu()
-    option = get_int_from_input()
-    perform_action(option)
-    main() if get_confirmation_yn() == "s" else perform_action(4)
+    while execute == "s":
+        show_menu()
+        option = get_int_from_input()
+        perform_action(option)
+        if option != 0:
+            execute = get_confirmation_yn()
+
 main()
 
 
