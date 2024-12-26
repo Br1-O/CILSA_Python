@@ -22,6 +22,9 @@ Usar otro archivo .csv con una estructura diferente, pero implementar algún tip
 Guardar los resultados filtrados en un nuevo archivo CSV o TXT.
 """
 
+import os
+import platform
+
 person_interface = {"Nombre" : "-", "Edad" : 0, "Ciudad" : "-"}
 fields = list(person_interface.keys())
 people_interface = {}
@@ -29,23 +32,30 @@ people_interface = {}
 people_all_data = people_interface.copy()
 people_file_path = "datos.csv"
 
+def clear_console():
+    if platform.system() == "Windows":
+        os.system("cls")  # Clean console for Windows
+    else:
+        os.system("clear")  # Clean console for macOS y Linux
+
 def show_menu():
 
     menu = """
-
-    ■ Ingrese el número de la acción que desea realizar:
-
-    1. Mostrar el listado completo de personas
-
-    2. Buscar una persona por su nombre o apellido
-
-    · Mostrar el listado filtrado por:
-
-        3. Edad
-        4. Ciudad
-
-    0. Salir
-
+╔══════════════════════════════════════════════════════════╗
+║   ■ Ingrese el número de la acción que desea realizar:   ║
+╠══════════════════════════════════════════════════════════╣
+║                                                          ║
+║   1. Mostrar el listado completo de personas             ║
+║                                                          ║
+║   2. Buscar una persona por su nombre o apellido         ║
+║                                                          ║
+║   · Mostrar el listado filtrado por:                     ║
+║                                                          ║
+║       3. Edad                                            ║
+║       4. Ciudad                                          ║
+║                                                          ║
+║   0. Salir                                               ║
+╚══════════════════════════════════════════════════════════╝
     """
     print(menu)
 
@@ -208,6 +218,7 @@ def perform_action(option = 0):
                 if save_into_file == "s" : export_to_csv_file(filtered_data)
 
                 repeat = get_confirmation_yn("\n¿Desea realizar una nueva busqueda por rango de edad? \n Ingrese: SI ó NO\n")
+                clear_console()
         elif option == 4:
             repeat = "s"
             while repeat == "s":
@@ -218,6 +229,7 @@ def perform_action(option = 0):
                 if save_into_file == "s" : export_to_csv_file(filtered_data)
                 
                 repeat = get_confirmation_yn("\n¿Desea realizar una nueva busqueda por ciudad? \n Ingrese: SI ó NO\n")
+                clear_console()
         elif option == 2:
             repeat = "s"
             while repeat == "s":
@@ -228,7 +240,9 @@ def perform_action(option = 0):
                 if save_into_file == "s" : export_to_csv_file(filtered_data)
 
                 repeat = get_confirmation_yn("\n¿Desea realizar una nueva busqueda por nombre o apellido? \n Ingrese: SI ó NO\n")
+                clear_console()
         elif option == 0:
+            clear_console()
             print("\n¡Adiós! ¡Nos vemos la próxima!")
             global execute
             execute = "n"
@@ -245,8 +259,10 @@ def main():
     while execute == "s":
         show_menu()
         option = get_int_from_input()
+        clear_console()
         perform_action(option)
         if option != 0:
             execute = get_confirmation_yn()
+            clear_console()
 
 main()
