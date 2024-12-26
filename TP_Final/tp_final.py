@@ -62,6 +62,16 @@ def get_int_from_input():
     
     return selected_option
 
+def get_confirmation_yn(message = "\n¿Desea volver al menu principal? \n Ingrese: SI ó NO\n"):
+
+    selected_option = (input(message)[0]).strip().lower()
+
+    while selected_option != "n" and selected_option != "s":
+        print("\n¡La opción seleccionada debe ser SI o NO!")
+        selected_option = (input(message)[0]).strip().lower()
+    
+    return selected_option
+
 def read_from_file(file_path = ""):
 
     """
@@ -78,6 +88,25 @@ def read_from_file(file_path = ""):
         print(f"¡No se pudo leer los datos desde el archivo {file_path} a causa del error: {e}!")
 
     return content
+
+def export_to_csv_file(people = people_interface):
+    
+    success = False
+
+    file_name = input("Ingrese el nombre con el que desea guardar el archivo: \n") + ".csv"
+
+    try:
+        with open(file_name, "w") as file:
+            file.write(f"{fields[0]}, {fields[1]}, {fields[2]}\n")
+            for person in people.values():
+                file.write(f"{person['Nombre']}, {person['Edad']}, {person['Ciudad']} \n")
+            file.close()
+        print(f"¡El archivo {file_name} fue creado exitosamente!")
+        success = True
+    except Exception as e:
+        print(f"¡No se pudo crear el archivo {file_name} a causa del error: {e}!")
+
+    return success
 
 def load_data_into_dict(file_path = ""):
 
@@ -156,29 +185,22 @@ def filter_data_by(filter = 0):
 
     return filtered_data
 
-def export_to_csv_file(people = people_interface):
-    
-    success = False
-
-    file_name = input("Ingrese el nombre con el que desea guardar el archivo: \n") + ".csv"
-
-    with open(file_name, "w") as file:
-        file.write(f"{fields[0]}, {fields[1]}, {fields[2]}\n")
-        for person in people:
-            person["Nombre"]
-
-    return success
-
 def perform_action(option = 0):
 
     if option == 1:
         display_data(people_all_data, "\n ■ El listado de todas las personas registradas es: ")
     elif option == 2:
-        display_data(filter_data_by(2), "\n ■ El listado de las personas registradas filtradas por ese rango de edad es: ")
+        filtered_data = filter_data_by(2)
+        display_data(filtered_data, "\n ■ El listado de las personas registradas filtradas por ese rango de edad es: ")
+        save_into_file = get_confirmation_yn("\n¿Desea guardar el listado actual en un nuevo archivo? \n Ingrese: SI ó NO\n")
+        if save_into_file == "s" : export_to_csv_file(filtered_data)
     elif option == 3:
-        display_data(filter_data_by(3), "\n ■ El listado de las personas registradas en esa ciudad es: ")
+        filtered_data = filter_data_by(3)
+        display_data(filtered_data, "\n ■ El listado de las personas registradas en esa ciudad es: ")
+        save_into_file = get_confirmation_yn("\n¿Desea guardar el listado actual en un nuevo archivo? \n Ingrese: SI ó NO\n")
+        if save_into_file == "s" : export_to_csv_file(filtered_data)
     elif option == 4:
-        print("¡Adiós!")
+        print("\n¡Adiós! ¡Nos vemos la próxima!")
         return
     else:
         print("¡Opción inválida!")
@@ -193,7 +215,7 @@ def main():
     show_menu()
     option = get_int_from_input()
     perform_action(option)
-
+    main() if get_confirmation_yn() == "s" else perform_action(4)
 main()
 
 
